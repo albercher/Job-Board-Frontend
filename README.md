@@ -90,7 +90,7 @@ Job Board was made as a phase 3 project at Flatiron School.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-IMPORTANT: Be sure to follow the instructions for setting up the [back end]() as well.
+IMPORTANT: Be sure to follow the instructions for setting up the [back end](https://github.com/albercher/Job-Board-Backend) as well.
 
 
 ### Prerequisites
