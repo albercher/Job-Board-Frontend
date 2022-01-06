@@ -1,27 +1,34 @@
 import Result from "./Result";
 import Grid from "@mui/material/Grid";
 
-function Results({ listings, handleRemove, sortData, sort }) {
-  let sorted = [];
+function Results({ listings, handleRemove, sort }) {
   if (sort === "date") {
-    sorted = listings.sort(function (a, b) {
+    listings.sort((a, b) => {
+      let aTitle = a.title.toLowerCase();
+      let bTitle = b.title.toLowerCase();
+
       if (a.created_on > b.created_on) return -1;
       if (a.created_on < b.created_on) return 1;
 
       // if our created_on dates are the same, sort by title
-      if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
-      if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
+      if (aTitle > bTitle) return 1;
+      if (aTitle < bTitle) return -1;
     });
   } else if (sort === "company") {
-    sorted = listings.sort(function (a, b) {
-      if (a.company.name.toLowerCase() < b.company.name.toLowerCase()) return -1;
-      if (a.company.name.toLowerCase() > b.company.name.toLowerCase()) return 1;
+    listings.sort((a, b) => {
+      let aComp = a.company.name.toLowerCase();
+      let bComp = b.company.name.toLowerCase();
+
+      if (aComp < bComp) return -1;
+      if (aComp > bComp) return 1;
     });
   } else if (sort === "title") {
-    sorted = listings.sort(function (a, b) {
-      // return a.title < b.title ? -1 : a.title > b.title ? 1 : 0;
-      if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
-      if (a.title.toLowerCase() < b.title.toLowerCase()) return -1;
+    listings.sort((a, b) => {
+      let aTitle = a.title.toLowerCase();
+      let bTitle = b.title.toLowerCase();
+
+      if (aTitle > bTitle) return 1;
+      if (aTitle < bTitle) return -1;
     });
   }
 
