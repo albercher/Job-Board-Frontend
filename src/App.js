@@ -169,6 +169,7 @@ function App() {
           height: "80vh",
           backgroundSize: "cover",
         }}
+        id="back-to-top-anchor"
       >
         <Hero
           handleSearch={handleSearch}
