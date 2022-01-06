@@ -42,7 +42,7 @@ function Result({ listing, handleRemove }) {
   }
 
   return (
-    <Card sx={{ width: "60%", px: 3, my: 2 }}>
+    <Card sx={{ width: "70%", my: 2 }}>
       <CardContent>
         <Typography variant="subtitle1">
           {listing.company.name} • {listing.employment_type}

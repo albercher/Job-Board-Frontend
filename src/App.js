@@ -5,13 +5,18 @@ import { useEffect, useState } from "react";
 import Hero from "./components/Hero";
 import Results from "./components/Results";
 import NewForm from "./components/NewForm";
+import Sort from "./components/Sort";
+import BackToTop from "./components/BackToTop";
 
 // material-UI components
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
+
 // images
 import heroimg from "./heroimg4.jpg";
+
+// TODO: in future: Add "apply" frontend and backend
 
 function App() {
   // USE STATES
@@ -24,6 +29,9 @@ function App() {
 
   // handle form dialog display
   const [open, setOpen] = useState(false);
+
+  // handle sorting
+  const [sort, setSort] = useState("date");
 
   // controlled search input form
   let [search, setSearch] = useState({
@@ -70,6 +78,7 @@ function App() {
         setListingsDisplayed([...listingsDisplayed, data]);
       });
     handleClose();
+    // sortData();
   }
 
   // handle form dialog display open and close
@@ -104,41 +113,41 @@ function App() {
     if (search.who && search.what && search.where) {
       filteredArr = listings.filter((listing) => {
         return (
-          listing.company.name === search.who &&
-          listing.title === search.what &&
-          listing.location === search.where
+          listing.company.name.toLowerCase() === search.who.toLowerCase() &&
+          listing.title.toLowerCase() === search.what.toLowerCase() &&
+          listing.location.toLowerCase() === search.where.toLowerCase()
         );
       });
     } else if (search.who && search.what) {
       filteredArr = listings.filter((listing) => {
         return (
-          listing.company.name === search.who && listing.title === search.what
+          listing.company.name.toLowerCase() === search.who.toLowerCase() && listing.title.toLowerCase() === search.what.toLowerCase()
         );
       });
     } else if (search.what && search.where) {
       filteredArr = listings.filter((listing) => {
         return (
-          listing.title === search.what && listing.location === search.where
+          listing.title.toLowerCase() === search.what.toLowerCase() && listing.location.toLowerCase() === search.where.toLowerCase()
         );
       });
     } else if (search.who && search.where) {
       filteredArr = listings.filter((listing) => {
         return (
-          listing.company.name === search.who &&
-          listing.location === search.where
+          listing.company.name.toLowerCase() === search.who.toLowerCase() &&
+          listing.location.toLowerCase() === search.where.toLowerCase()
         );
       });
     } else if (search.who) {
       filteredArr = listings.filter((listing) => {
-        return listing.company.name === search.who;
+        return listing.company.name.toLowerCase() === search.who.toLowerCase();
       });
     } else if (search.what) {
       filteredArr = listings.filter((listing) => {
-        return listing.title === search.what;
+        return listing.title.toLowerCase() === search.what.toLowerCase();
       });
     } else if (search.where) {
       filteredArr = listings.filter((listing) => {
-        return listing.location === search.where;
+        return listing.location.toLowerCase() === search.where.toLowerCase();
       });
     }
 
@@ -150,12 +159,12 @@ function App() {
     }
   }
 
+
   return (
-    <Box sx={{ backgroundColor: "#fdfdfd"}}>
+    <Box sx={{ backgroundColor: "#fdfdfd" }}>
+<BackToTop />
       <Box
         sx={{
-          // pt: 5,
-          // px: 10,
           backgroundImage: `linear-gradient(rgba(255,255,255,0.0), rgba(0,0,0,0.3)), url(${heroimg})`,
           height: "80vh",
           backgroundSize: "cover",
@@ -178,7 +187,8 @@ function App() {
         setFormData={setFormData}
         addListing={addListing}
       />
-      <Results listings={listingsDisplayed} handleRemove={handleRemove} />
+      <Sort sort={sort} setSort={setSort} />
+      <Results listings={listingsDisplayed} handleRemove={handleRemove} sort={sort} />
     </Box>
   );
 }
